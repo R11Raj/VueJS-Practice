@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="basicCalculator.css">  
+  </head>
+  <body>
+    <div id="app">
+        <h1>{{Title}}</h1>
+        
+        <label>Enter First Number</label>
+        <input placeholder="Enter Number" v-model="n1" type="number"><br><br>
+        <label>Enter Second Number</label>
+        <input placeholder="Enter Number" v-model="n2" type="number"><br><br>
+        <button v-on:click="ops('+')">+</button>
+        <button v-on:click="ops('-')">-</button>
+        <button v-on:click="ops('*')">*</button>
+        <button v-on:click="ops('/')">/</button>
+        <button v-on:click="result()" class="res">Result</button>
+        <br><br>
+        <label class="inl">Expression to Evaluate:</label>
+        <span class="inl">{{exp}}</h4><br><br><br>
+        <label class="ino">Results:</label>
+        <span class="ino">{{output}}</h4><br><br>
+      </div>
+</body>  
+    <script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            Title:'Calculator',
+            cal:'',
+            output:'Please perform an operation to view its result',
+            exp:'Entered expression',
+            n1:'',
+            n2:'',
+        },
+        methods:{
+            ops:function(opc){
+                this.exp=this.n1+opc+this.n2;
+            },
+            result:function(){
+                this.output=eval(this.exp);
+            }      
+    }
+    });
+    </script>
