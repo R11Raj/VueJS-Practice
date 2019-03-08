@@ -17,9 +17,10 @@
       which will be explained later.
     -->
     <todo-item
-      v-for="item in todoList"
+      v-for="(item, index) in todoList"
       v-bind:todo="item"
       v-bind:key="item.id"
+      :index="index"
     ></todo-item>
   </ul>
 <input placeholder="Enter new task.." v-model="newtask" type="text">
@@ -28,8 +29,8 @@
 </body>
 <script>        
 Vue.component('todo-item', {
-  props: ['todo'],
-  template: '<li>{{ todo.text }} &nbsp&nbsp<button v-on:click="remove(todo)">Remove</button></li>'
+  props: ['todo', 'index'],
+  template: '<li>{{ todo.text }} &nbsp&nbsp<button v-on:click="$parent.remove(index)">Remove</button></li>'
 })
 
 var app7 = new Vue({
@@ -37,6 +38,7 @@ var app7 = new Vue({
   data: {
       title:'To-Do List',
       newtask:'',
+      latestID:2,
     todoList: [
       { id: 0, text: 'Buy Vegetables' },
       { id: 1, text: 'Buy milk andCheese' },
@@ -45,11 +47,12 @@ var app7 = new Vue({
   },
   methods:{
       Add:function(){
-         return this.todoList.push({text:this.newtask});
+         return this.todoList.push({text:this.newtask, id:this.latestID++});
       },
-      remove:function(item){
-          this.todoList.splice(item.id,1);
+      remove:function(index){
+          console.log(index);
+          this.todoList.splice(index,1);
       },
-  } ,   
+  } ,
 });
 </script>
