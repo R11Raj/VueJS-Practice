@@ -1,0 +1,30 @@
+body{
+    background-color: aquamarine;
+    text-align: center;
+}
+div{
+    font-family: sans-serif;
+    background-color: antiquewhite;
+}
+h1{
+    background-color: burlywood;
+    height: 50px;
+    text-align: center;
+}
+.inl,.ino{
+    display: inline;
+}
+button{
+    margin: 0.5em;
+    height: 3em;
+    width: 3em; 
+    background-color:deepskyblue;
+}
+.res{
+    width: 5em;
+    background-color: green;
+}
+label{
+    font-weight: bold;
+}
+     

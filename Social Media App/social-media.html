@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="social-media.css">
+  </head>
+<body>
+    <div id="app">
+        <div class="navig">
+            <label class="main">Social Media</label>
+            <button class="navi">Log Out</button>
+            <button class="navi">Notifications</button>
+            <button class="navi">Settings</button>
+        </div>
+        <div  class="left">
+            <img src="profile.png" class="prof" alt="Image coming soon">
+            <h3>{{name}}</h3>
+            <ul class="stats" style="list-style: fa-fa star;">
+                <li > 
+                    <label>Friends</label>
+                    <span>{{friends}}</span>
+                </li>
+                <li>
+                    <label>Followers</label>
+                    <span>{{followers}}</span>    
+                </li>
+                <li>
+                    <label>Posts</label>
+                    <span>{{posts}}</span>
+                </li>    
+            </ul>        
+        </div>
+        <aside class="right">
+            <br>
+            <label style="margin: 5%;font-size: 25px;">Games</label>
+            <ul>
+                <li v-for="game in games">
+                    {{ game.name }}
+                </li>
+            </ul>
+            <label style="margin: 5%;font-size: 25px;">Online Users</label>
+            <ul class="online">
+                <li v-for="user in OnlineUsers" >
+                    {{ user.name }}
+                </li>
+            </ul>
+        </aside>
+        <div class="center">
+            <br>
+            <label style="margin: 20px;font-size: 20px;">Create Post</label>
+            <br><br>
+            <textarea v-model="content" placeholder="Type something here...." ></textarea><br>
+            <button v-on:click="add()" class="share">Share it!</button>
+            <br>
+            <ul class="Timeline">
+                <li  v-for="item in postList" class="single">
+                    <img src="profileSmall.png" class="postprof"></img>    
+                    <h5 class="postprof">Raj Prajapati</h5>
+                    <label id="time" class="postprof"> posted on {{item.timeOfPost}}</label>
+                    <p>{{item.text}}</p>
+                    <span style="font-size: 15px;" class="like">{{item.likes}} likes</span>
+                    <button v-on:click="like(item)" class="like">like</button>    
+                </li>
+            </ul>
+        </div>
+    </div> 
+<script>
+var vm=new Vue({
+    el:"#app",
+    data:{
+        name:'Raj Prajapati',
+        friends:111,
+        followers:90,
+        posts:66,
+        content:'',
+        games: [
+                { name: 'Jig-Saw' },
+                { name: 'Tic tac Toe' },
+                { name: '3D Car race' },
+                { name: 'Poker' },
+                { name: 'Teenpatti' },
+                { name: 'Cricket' },
+                { name: 'Rummy' },    
+                ],
+        OnlineUsers:[
+                { name: 'Neel Patel' },
+                { name: 'Sumit saini' },
+                { name: 'Nayan Meghwal' },
+                { name: 'Vivek Vanani' },
+                { name: 'Harsh Suthar' },
+                { name: 'Sagar Patel' },
+                { name: 'Swapnil Patel' },    
+                ],
+        postList:[
+                {   timeOfPost:'3/1/2019, 09:12:05 AM',
+                    likes:0,
+                    text: 'Chiling out with friends here at Hard rock cafe in Time square,Newark.'
+                },
+                {   timeOfPost:'2/15/2019, 05:32:05 PM',
+                    likes:0,
+                    text: 'Buy milk and Cheese for healthy breakfast' 
+                }, 
+                {   timeOfPost:'2/1/2019, 01:09:05 AM',
+                    likes:0,
+                    text: 'Making the most of the weekend.Had a great weekend in Goa.' 
+                },
+                {   timeOfPost:'1/14/2019, 04:30:00 PM',
+                    likes:0,
+                    text: 'Happy Makarsankranti everyone have a safe outing today..'
+                }
+                ]
+        },
+    methods:{
+            add:function(){
+                if(this.content==''){
+                    alert('Please enter some content in post to share it!!');
+                    return;
+                }
+                console.log(this.content);
+                tmp=new Date().toLocaleString();
+                this.postList.unshift({likes:0,timeOfPost:tmp,text:this.content});
+                this.content='';
+            },
+            like:function(item){
+                ++item.likes;
+                console.log(item.likes);
+            }
+        }
+});   
+</script>
+</body>
+</html>
